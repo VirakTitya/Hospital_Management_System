@@ -21,12 +21,12 @@ class Staff extends Person {
     return salary;
   }
 
+  // AI Generated
   void setSalary(double newSalary) {
     if (newSalary >= 0) {
       salary = newSalary;
-      print('Salary updated to: \$${newSalary.toStringAsFixed(2)}');
     } else {
-      print('Error: Salary cannot be negative');
+      throw ArgumentError('Salary cannot be negative');
     }
   }
 
@@ -41,10 +41,15 @@ class Staff extends Person {
   }
 
   @override
-  void displayInfo() {
-    super.displayInfo();
-    print('Salary: \$${salary.toStringAsFixed(2)}');
-    print('Role: ${role.title}');
-    print('Role Description: ${role.description}');
+  String displayInfo() {
+    final buffer = StringBuffer();
+    buffer.writeln(super.displayInfo());
+    buffer.writeln('Salary: \$${salary.toStringAsFixed(2)}');
+    buffer.writeln('Role: ${role.title}');
+    buffer.writeln('Role Description: ${role.description}');
+    return buffer.toString();
   }
+
+  @override
+  String toString() => displayInfo();
 }

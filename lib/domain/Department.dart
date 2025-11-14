@@ -1,4 +1,5 @@
 import 'Staff.dart';
+
 class Department {
   int departmentId;
   String departmentName;
@@ -10,31 +11,35 @@ class Department {
     List<Staff>? staffList,
   }) : staffList = staffList ?? [];
 
+  /// Add staff to the department (no I/O here)
   void addStaff(Staff staff) {
     staffList.add(staff);
-    print('Staff ${staff.name} added to $departmentName department');
   }
 
-  void listStaff() {
-    print('\n=== Staff List for $departmentName Department ===');
+  /// Return a formatted staff list string for UI to print
+  String listStaff() {
+    final buffer = StringBuffer();
+    buffer.writeln('\n=== Staff List for $departmentName Department ===');
     if (staffList.isEmpty) {
-      print('No staff members in this department');
+      buffer.writeln('No staff members in this department');
     } else {
       for (int i = 0; i < staffList.length; i++) {
-        print('\n${i + 1}. --- Staff Member ${i + 1} ---');
-        print('   ID: ${staffList[i].id}');
-        print('   Name: ${staffList[i].name}');
-        print('   Age: ${staffList[i].age}');
-        print('   Gender: ${staffList[i].gender}');
-        print('   Email: ${staffList[i].email}');
-        print('   Phone: ${staffList[i].phoneNumber}');
-        print('   Address: ${staffList[i].address}');
-        print('   Role: ${staffList[i].getRole()}');
-        print('   Role Description: ${staffList[i].role.description}');
-        print('   Salary: \$${staffList[i].salary.toStringAsFixed(2)}');
+        final s = staffList[i];
+        buffer.writeln('\n${i + 1}. --- Staff Member ${i + 1} ---');
+        buffer.writeln('   ID: ${s.id}');
+        buffer.writeln('   Name: ${s.name}');
+        buffer.writeln('   Age: ${s.age}');
+        buffer.writeln('   Gender: ${s.gender}');
+        buffer.writeln('   Email: ${s.email}');
+        buffer.writeln('   Phone: ${s.phoneNumber}');
+        buffer.writeln('   Address: ${s.address}');
+        buffer.writeln('   Role: ${s.getRole()}');
+        buffer.writeln('   Role Description: ${s.role.description}');
+        buffer.writeln('   Salary: \$${s.salary.toStringAsFixed(2)}');
       }
     }
-    print('\nTotal Staff in $departmentName: ${staffList.length}\n');
+    buffer.writeln('\nTotal Staff in $departmentName: ${staffList.length}\n');
+    return buffer.toString();
   }
 
   bool removeStaff(int staffId) {

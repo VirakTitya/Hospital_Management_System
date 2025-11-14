@@ -18,14 +18,20 @@ class Person {
     required this.address,
   });
 
-  void displayInfo() {
-    print('--- Person Information ---');
-    print('ID: $id');
-    print('Name: $name');
-    print('Age: $age');
-    print('Gender: $gender');
-    print('Email: $email');
-    print('Phone: $phoneNumber');
-    print('Address: $address');
+  /// Return a formatted string of person information (no I/O)
+  String displayInfo() {
+    final buffer = StringBuffer();
+    buffer.writeln('--- Person Information ---');
+    buffer.writeln('ID: $id');
+    buffer.writeln('Name: $name');
+    buffer.writeln('Age: $age');
+    buffer.writeln('Gender: $gender');
+    buffer.writeln('Email: $email');
+    buffer.writeln('Phone: $phoneNumber');
+    buffer.writeln('Address: $address');
+    return buffer.toString();
   }
+
+  @override
+  String toString() => displayInfo();
 }

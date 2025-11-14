@@ -13,11 +13,16 @@ class Role {
   });
 
   /// Display role information
-  void displayRoleInfo() {
-    print('Role: $title');
-    print('Description: $description');
+  String displayRoleInfo() {
+    final buffer = StringBuffer();
+    buffer.writeln('Role: $title');
+    buffer.writeln('Description: $description');
     if (department != null) {
-      print('Department: ${department.departmentName}');
+      buffer.writeln('Department: ${department.departmentName}');
     }
+    return buffer.toString();
   }
+
+  @override
+  String toString() => displayRoleInfo();
 }

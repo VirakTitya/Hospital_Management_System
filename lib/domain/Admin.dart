@@ -312,11 +312,14 @@ class Admin extends Staff {
   }
 
   @override
-  void displayInfo() {
-    super.displayInfo();
-    print('Role: Administrator');
+  String displayInfo() {
+    String baseInfo = super.displayInfo();
+    String extra = 'Role: Administrator';
     if (currentHospital != null) {
-      print('Managing Hospital: ${currentHospital!.hospitalName}');
+      extra += '\nManaging Hospital: ${currentHospital!.hospitalName}';
     }
+    // preserve previous behavior of printing additional info
+    print(extra);
+    return '$baseInfo\n$extra';
   }
 }

@@ -15,47 +15,50 @@ class Hospital {
   /// Add a department to the hospital
   void addDepartment(Department dept) {
     departments.add(dept);
-    print('Department "${dept.departmentName}" added to $hospitalName');
   }
 
   /// List all departments in the hospital
-  void listDepartments() {
-    print('\n========== Departments at $hospitalName ==========');
+  String listDepartments() {
+    final buffer = StringBuffer();
+    buffer.writeln('\n========== Departments at $hospitalName ==========');
     if (departments.isEmpty) {
-      print('No departments available');
+      buffer.writeln('No departments available');
     } else {
       for (int i = 0; i < departments.length; i++) {
-        print('${i + 1}. ${departments[i].departmentName} (ID: ${departments[i].departmentId})');
-        print('   Staff Count: ${departments[i].staffList.length}');
+        buffer.writeln('${i + 1}. ${departments[i].departmentName} (ID: ${departments[i].departmentId})');
+        buffer.writeln('   Staff Count: ${departments[i].staffList.length}');
       }
     }
-    print('Total Departments: ${departments.length}\n');
+    buffer.writeln('Total Departments: ${departments.length}\n');
+    return buffer.toString();
   }
 
   /// List all staff across all departments
-  void listAllStaff() {
-    print('\n========== All Staff at $hospitalName ==========');
+  String listAllStaff() {
+    final buffer = StringBuffer();
+    buffer.writeln('\n========== All Staff at $hospitalName ==========');
     int totalStaff = 0;
     
     if (departments.isEmpty) {
-      print('No departments available');
-      return;
+      buffer.writeln('No departments available');
+      return buffer.toString();
     }
 
     for (var dept in departments) {
       if (dept.staffList.isNotEmpty) {
-        print('\n--- ${dept.departmentName} Department ---');
+        buffer.writeln('\n--- ${dept.departmentName} Department ---');
         for (var staff in dept.staffList) {
-          print('• ${staff.name} - ${staff.getRole()} (ID: ${staff.id})');
+          buffer.writeln('• ${staff.name} - ${staff.getRole()} (ID: ${staff.id})');
           totalStaff++;
         }
       }
     }
     
     if (totalStaff == 0) {
-      print('No staff members in the hospital');
+      buffer.writeln('No staff members in the hospital');
     }
-    print('\nTotal Staff: $totalStaff\n');
+    buffer.writeln('\nTotal Staff: $totalStaff\n');
+    return buffer.toString();
   }
 
   /// Find a department by ID
